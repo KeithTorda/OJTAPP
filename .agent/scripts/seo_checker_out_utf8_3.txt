@@ -1,0 +1,28 @@
+﻿
+============================================================
+  SEO CHECKER - Search Engine Optimization Audit
+============================================================
+Project: C:\xampp\htdocs\ojt
+Time: 2026-02-21 09:10:05
+------------------------------------------------------------
+Found 4 page files to analyze
+
+============================================================
+SEO ANALYSIS RESULTS
+============================================================
+
+Issue Summary:
+  [1] Missing meta description
+  [1] Missing Open Graph tags
+
+Affected files (1):
+  - index.html
+
+{
+  "script": "seo_checker",
+  "project": "C:\\xampp\\htdocs\\ojt",
+  "files_checked": 4,
+  "files_with_issues": 1,
+  "issues_found": 2,
+  "passed": false
+}

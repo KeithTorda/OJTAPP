@@ -1,0 +1,31 @@
+HTTP 200 | RESPONSE: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Designation: AI Assistant, OJT Tracking"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "MAX_TOKENS",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 98,
+    "candidatesTokenCount": 9,
+    "totalTokenCount": 350,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 98
+      }
+    ],
+    "thoughtsTokenCount": 243
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "oBqZadGsIo-N0-kPuIvKYA"
+}
+

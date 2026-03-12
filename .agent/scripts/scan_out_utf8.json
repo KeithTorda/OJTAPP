@@ -1,0 +1,228 @@
+﻿{
+  "project": ".",
+  "timestamp": "2026-02-21T08:51:18.821206",
+  "scan_type": "all",
+  "scans": {
+    "dependencies": {
+      "tool": "dependency_scanner",
+      "findings": [],
+      "status": "[OK] Supply chain checks passed"
+    },
+    "secrets": {
+      "tool": "secret_scanner",
+      "findings": [
+        {
+          "file": ".agent\\skills\\vulnerability-scanner\\scripts\\security_scan.py",
+          "type": "Bearer Token",
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "file": "api\\setup_db.php",
+          "type": "Password",
+          "severity": "high",
+          "count": 1
+        }
+      ],
+      "status": "[!!] CRITICAL: Secrets exposed!",
+      "scanned_files": 597,
+      "by_severity": {
+        "critical": 1,
+        "high": 1,
+        "medium": 0
+      }
+    },
+    "code_patterns": {
+      "tool": "pattern_scanner",
+      "findings": [
+        {
+          "file": ".agent\\skills\\vulnerability-scanner\\scripts\\security_scan.py",
+          "line": 63,
+          "pattern": "eval() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "(r'eval\\s*\\(', \"eval() usage\", \"critical\", \"Code Injection risk\"),"
+        },
+        {
+          "file": ".agent\\skills\\vulnerability-scanner\\scripts\\security_scan.py",
+          "line": 64,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "(r'exec\\s*\\(', \"exec() usage\", \"critical\", \"Code Injection risk\"),"
+        },
+        {
+          "file": ".agent\\skills\\vulnerability-scanner\\scripts\\security_scan.py",
+          "line": 70,
+          "pattern": "dangerouslySetInnerHTML",
+          "severity": "high",
+          "category": "XSS risk",
+          "snippet": "(r'dangerouslySetInnerHTML', \"dangerouslySetInnerHTML\", \"high\", \"XSS risk\"),"
+        },
+        {
+          "file": ".agent\\skills\\vulnerability-scanner\\scripts\\security_scan.py",
+          "line": 80,
+          "pattern": "Insecure flag",
+          "severity": "medium",
+          "category": "Security disabled",
+          "snippet": "(r'--insecure', \"Insecure flag\", \"medium\", \"Security disabled\"),"
+        },
+        {
+          "file": "api\\setup_db.php",
+          "line": 12,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$conn->exec($sql);"
+        },
+        {
+          "file": "api\\setup_db.php",
+          "line": 15,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$conn->exec(\"USE ojt_logs_db\");"
+        },
+        {
+          "file": "api\\setup_db.php",
+          "line": 24,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$conn->exec($sql);"
+        },
+        {
+          "file": "api\\setup_db.php",
+          "line": 38,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$conn->exec($sql);"
+        },
+        {
+          "file": "api\\setup_db.php",
+          "line": 44,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$conn->exec($sql);"
+        },
+        {
+          "file": "api\\config\\Database.php",
+          "line": 14,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$this->conn->exec(\"set names utf8\");"
+        },
+        {
+          "file": "api\\vendor\\dompdf\\dompdf\\src\\Helpers.php",
+          "line": 1136,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$data = curl_exec($curl);"
+        },
+        {
+          "file": "api\\vendor\\dompdf\\dompdf\\src\\PhpEvaluator.php",
+          "line": 52,
+          "pattern": "eval() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "eval($code);"
+        },
+        {
+          "file": "api\\vendor\\dompdf\\dompdf\\src\\Adapter\\CPDF.php",
+          "line": 909,
+          "pattern": "eval() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "eval($callback);"
+        },
+        {
+          "file": "api\\vendor\\dompdf\\dompdf\\src\\Adapter\\PDFLib.php",
+          "line": 1328,
+          "pattern": "eval() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "eval($callback);"
+        },
+        {
+          "file": "api\\vendor\\thecodingmachine\\safe\\generated\\8.1\\curl.php",
+          "line": 48,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "function curl_exec(\\CurlHandle $handle)"
+        },
+        {
+          "file": "api\\vendor\\thecodingmachine\\safe\\generated\\8.1\\curl.php",
+          "line": 51,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$safeResult = \\curl_exec($handle);"
+        },
+        {
+          "file": "api\\vendor\\thecodingmachine\\safe\\generated\\8.1\\exec.php",
+          "line": 15,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "function exec(string $command, ?array &$output = null, ?int &$result_code = null"
+        },
+        {
+          "file": "api\\vendor\\thecodingmachine\\safe\\generated\\8.1\\exec.php",
+          "line": 18,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$safeResult = \\exec($command, $output, $result_code);"
+        },
+        {
+          "file": "api\\vendor\\thecodingmachine\\safe\\generated\\8.1\\exec.php",
+          "line": 94,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "function shell_exec(string $command): ?string"
+        },
+        {
+          "file": "api\\vendor\\thecodingmachine\\safe\\generated\\8.1\\exec.php",
+          "line": 97,
+          "pattern": "exec() usage",
+          "severity": "critical",
+          "category": "Code Injection risk",
+          "snippet": "$safeResult = \\shell_exec($command);"
+        }
+      ],
+      "status": "[!!] CRITICAL: 46 dangerous patterns",
+      "scanned_files": 584,
+      "by_category": {
+        "Code Injection risk": 46,
+        "XSS risk": 1,
+        "Security disabled": 1
+      }
+    },
+    "configuration": {
+      "tool": "config_scanner",
+      "findings": [
+        {
+          "issue": "No security headers configuration found",
+          "severity": "medium",
+          "recommendation": "Configure CSP, HSTS, X-Frame-Options headers"
+        }
+      ],
+      "status": "[?] Minor configuration issues",
+      "checks": {
+        "security_headers_config": false
+      }
+    }
+  },
+  "summary": {
+    "total_findings": 23,
+    "critical": 19,
+    "high": 2,
+    "overall_status": "[!!] CRITICAL ISSUES FOUND"
+  }
+}

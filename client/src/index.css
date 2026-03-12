@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-body antialiased;
+    min-height: 100dvh;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(11, 14, 20, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 242, 255, 0.15);
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.95);
+      opacity: 0.5;
+    }
+  }
+
+  .spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes scan {
+    0% {
+      top: 10%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    90% {
+      opacity: 0.8;
+    }
+    100% {
+      top: 90%;
+      opacity: 0;
+    }
+  }
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0e14;
+}
+::-webkit-scrollbar-thumb {
+  background: #00f2ff;
+  border-radius: 2px;
+}

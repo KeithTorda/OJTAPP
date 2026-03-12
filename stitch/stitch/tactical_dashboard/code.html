@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tactical Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#00f2ff",
+                "background-light": "#f5f8f8",
+                "background-dark": "#0B0E14", // Updated to requested deep charcoal
+                "matrix-green": "#00FF41",
+                },
+                fontFamily: {
+                "display": ["Rajdhani", "Space Grotesk", "sans-serif"],
+                "body": ["Space Grotesk", "sans-serif"],
+                "mono": ["Space Mono", "monospace"],
+                },
+                backgroundImage: {
+                    'circuit-pattern': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L20 10 L20 20 L30 20 M50 50 L60 50 L60 60 L80 60 M10 80 L30 80 L30 60' stroke='%2300f2ff' stroke-width='1' fill='none' opacity='0.05'/%3E%3Ccircle cx='20' cy='20' r='2' fill='%2300f2ff' opacity='0.05'/%3E%3Ccircle cx='60' cy='60' r='2' fill='%2300f2ff' opacity='0.05'/%3E%3C/svg%3E\")",
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                boxShadow: {
+                    'neon': '0 0 10px rgba(0, 242, 255, 0.3), 0 0 20px rgba(0, 242, 255, 0.1)',
+                    'neon-green': '0 0 10px rgba(0, 255, 65, 0.3), 0 0 20px rgba(0, 255, 65, 0.1)',
+                    'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+                }
+            },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(11, 14, 20, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 242, 255, 0.15);
+        }
+        
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+
+        .spin-slow {
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E14; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f2ff; 
+            border-radius: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-slate-900 dark:text-slate-100 font-body overflow-x-hidden relative selection:bg-primary selection:text-black">
+<!-- Background Pattern -->
+<div class="fixed inset-0 z-0 bg-circuit-pattern pointer-events-none"></div>
+<div class="fixed inset-0 z-0 bg-gradient-to-b from-[#0B0E14] via-transparent to-[#0B0E14] pointer-events-none"></div>
+<div class="relative z-10 flex flex-col min-h-screen pb-20"> <!-- Added padding-bottom for fixed nav -->
+<!-- Header -->
+<header class="flex items-center justify-between p-6 pb-2 border-b border-primary/20 bg-[#0B0E14]/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">terminal</span>
+<div>
+<h1 class="font-display font-bold text-lg tracking-widest text-white leading-none">TACTICAL DASHBOARD</h1>
+<p class="text-primary/60 text-[10px] font-mono tracking-widest uppercase mt-1">OJT-LOG // V.2.0.4</p>
+</div>
+</div>
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-primary/30 bg-primary/10 relative">
+<span class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse shadow-neon"></span>
+<img alt="User avatar profile picture" class="w-full h-full rounded-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all" data-alt="User avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAudIBtz33xJsMELkQPR1T9tzmO4r80et1zS5KVo7npw4HNq-cIWRxT6ona0C7yLlLo11653ssKWEmolmYzV5aQsIQyuipGCAk3jXeGQHDPXyz34y6IVlKzgNS54qlbgc-Xf1VqQtobObdHsCwj_1nSOpsBT3xw-0jWDHXzzirF1DgD8Dr06skwuyszRyNeiAsCsFNNvvfNx7vkNZCWXedg5r3H9EIE4_9tqfKuPQRiOPWsvPUUGmDuld7pWgmzBqaYgSqB1kvfIS0"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col gap-8 px-4 py-8 max-w-md mx-auto w-full">
+<!-- System Status -->
+<div class="glass-panel rounded-full px-4 py-2 flex items-center justify-between shadow-neon border-primary/30">
+<span class="text-primary/80 font-mono text-xs tracking-wider">SYSTEM STATUS</span>
+<div class="flex items-center gap-2">
+<span class="text-matrix-green font-display font-bold tracking-wider text-sm">ACTIVE</span>
+<div class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-matrix-green opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-matrix-green shadow-neon-green"></span>
+</div>
+</div>
+</div>
+<!-- Holographic Progress Ring -->
+<div class="relative flex flex-col items-center justify-center py-4">
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- Outer Decorative Ring -->
+<div class="absolute inset-0 rounded-full border border-primary/10 border-dashed spin-slow"></div>
+<!-- Glow Effect behind -->
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl"></div>
+<!-- SVG Chart -->
+<svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_15px_rgba(0,242,255,0.3)]" viewbox="0 0 100 100">
+<!-- Track -->
+<circle cx="50" cy="50" fill="none" r="40" stroke="#1c2a2b" stroke-width="6"></circle>
+<!-- Progress -->
+<circle class="text-primary" cx="50" cy="50" fill="none" r="40" stroke="#00f2ff" stroke-dasharray="251.2" stroke-dashoffset="70.336" stroke-linecap="round" stroke-width="6"></circle>
+<!-- Decorative inner ticks -->
+<circle cx="50" cy="50" fill="none" opacity="0.3" r="32" stroke="#00f2ff" stroke-dasharray="1 4" stroke-width="1"></circle>
+</svg>
+<!-- Center Content -->
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="text-4xl font-display font-bold text-white tracking-tighter drop-shadow-lg">72<span class="text-2xl text-primary">%</span></span>
+<span class="text-xs text-primary/70 font-mono mt-1 tracking-widest uppercase">Completion</span>
+</div>
+</div>
+<div class="mt-2 flex gap-8 text-center w-full justify-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Start</span>
+<span class="text-white font-mono text-xs">00:00</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Target</span>
+<span class="text-primary font-mono text-xs font-bold">500h</span>
+</div>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Hours Remaining Card -->
+<div class="col-span-1 glass-panel p-5 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<span class="text-xs font-mono text-primary/60 tracking-wider uppercase">Hours Left</span>
+<div class="flex items-end gap-1">
+<span class="text-3xl font-display font-bold text-white">124</span>
+<span class="text-xs font-mono text-slate-400 mb-1">h</span>
+</div>
+<div class="w-full bg-slate-800 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-primary w-[45%] h-full"></div>
+</div>
+</div>
+</div>
+<!-- Efficiency Card -->
+<div class="col-span-1 glass-panel p-5 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-primary">show_chart</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<span class="text-xs font-mono text-primary/60 tracking-wider uppercase">Efficiency</span>
+<div class="flex items-end gap-1">
+<span class="text-3xl font-display font-bold text-white">94</span>
+<span class="text-xs font-mono text-slate-400 mb-1">%</span>
+</div>
+<div class="w-full bg-slate-800 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-matrix-green w-[94%] h-full shadow-[0_0_10px_rgba(0,255,65,0.5)]"></div>
+</div>
+</div>
+</div>
+<!-- Days to Completion (Full Width) -->
+<div class="col-span-2 glass-panel p-5 rounded-2xl relative overflow-hidden group border-l-4 border-l-primary/50">
+<div class="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity transform rotate-12">
+<span class="material-symbols-outlined text-primary text-9xl">calendar_month</span>
+</div>
+<div class="flex items-center justify-between relative z-10">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-mono text-primary/60 tracking-wider uppercase">Estimated Completion</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-display font-bold text-white">14</span>
+<span class="text-sm font-mono text-slate-400 uppercase">Days</span>
+</div>
+</div>
+<div class="text-right">
+<div class="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 rounded border border-primary/20 text-xs font-mono text-primary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                                ON TRACK
+                            </div>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">Based on current velocity</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions List -->
+<div class="flex flex-col gap-2 mt-2">
+<h3 class="text-xs font-mono text-slate-500 uppercase tracking-widest pl-2 mb-1">Recent Logs</h3>
+<div class="glass-panel p-3 rounded-xl flex items-center justify-between group hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#1c2a2b] flex items-center justify-center text-primary group-hover:text-white group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-display font-bold text-white">Network Security</span>
+<span class="text-[10px] font-mono text-slate-400">Module 4.2 • 2h 30m</span>
+</div>
+</div>
+<span class="text-xs font-mono text-matrix-green">+5% XP</span>
+</div>
+<div class="glass-panel p-3 rounded-xl flex items-center justify-between group hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#1c2a2b] flex items-center justify-center text-primary group-hover:text-white group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-display font-bold text-white">Firewall Config</span>
+<span class="text-[10px] font-mono text-slate-400">Module 3.1 • 4h 15m</span>
+</div>
+</div>
+<span class="text-xs font-mono text-matrix-green">+8% XP</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation HUD -->
+<nav class="fixed bottom-0 left-0 right-0 bg-[#0B0E14] border-t border-primary/20 z-50 pb-safe">
+<div class="relative">
+<!-- Decorative HUD elements -->
+<div class="absolute -top-[1px] left-0 w-8 h-[1px] bg-primary shadow-[0_0_10px_#00f2ff]"></div>
+<div class="absolute -top-[1px] right-0 w-8 h-[1px] bg-primary shadow-[0_0_10px_#00f2ff]"></div>
+<div class="absolute -top-[5px] left-1/2 -translate-x-1/2 w-16 h-1 bg-primary/20 rounded-b-lg"></div>
+<div class="flex justify-around items-end pt-3 pb-5 px-6">
+<a class="flex flex-col items-center gap-1 group w-16" href="#">
+<div class="relative flex items-center justify-center p-2 rounded-lg group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:drop-shadow-[0_0_5px_rgba(0,242,255,0.8)] transition-all">dashboard</span>
+<div class="absolute bottom-0 w-1 h-1 bg-primary rounded-full opacity-100 shadow-[0_0_5px_#00f2ff]"></div>
+</div>
+<span class="text-[10px] font-mono text-primary font-bold tracking-wider">HUD</span>
+</a>
+<a class="flex flex-col items-center gap-1 group w-16 opacity-60 hover:opacity-100 transition-opacity" href="#">
+<div class="relative flex items-center justify-center p-2 rounded-lg group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-white text-2xl group-hover:text-primary transition-colors">list_alt</span>
+</div>
+<span class="text-[10px] font-mono text-white group-hover:text-primary tracking-wider">LOGS</span>
+</a>
+<div class="relative -top-6">
+<button class="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-b from-primary/20 to-[#0B0E14] border border-primary shadow-[0_0_15px_rgba(0,242,255,0.3)] hover:scale-105 active:scale-95 transition-transform group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:rotate-90 transition-transform duration-500">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 group w-16 opacity-60 hover:opacity-100 transition-opacity" href="#">
+<div class="relative flex items-center justify-center p-2 rounded-lg group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-white text-2xl group-hover:text-primary transition-colors">analytics</span>
+</div>
+<span class="text-[10px] font-mono text-white group-hover:text-primary tracking-wider">STATS</span>
+</a>
+<a class="flex flex-col items-center gap-1 group w-16 opacity-60 hover:opacity-100 transition-opacity" href="#">
+<div class="relative flex items-center justify-center p-2 rounded-lg group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-white text-2xl group-hover:text-primary transition-colors">person</span>
+</div>
+<span class="text-[10px] font-mono text-white group-hover:text-primary tracking-wider">ID</span>
+</a>
+</div>
+</div>
+</nav>
+</div>
+<!-- Decorative Corner Elements for HUD feel -->
+<div class="fixed top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-primary/30 rounded-tl-xl pointer-events-none z-50 m-4"></div>
+<div class="fixed top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-primary/30 rounded-tr-xl pointer-events-none z-50 m-4"></div>
+<div class="fixed bottom-20 left-0 w-8 h-8 border-l-2 border-b-2 border-primary/30 rounded-bl-xl pointer-events-none z-40 m-4"></div>
+<div class="fixed bottom-20 right-0 w-8 h-8 border-r-2 border-b-2 border-primary/30 rounded-br-xl pointer-events-none z-40 m-4"></div>
+</body></html>

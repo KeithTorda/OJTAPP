@@ -1,0 +1,26 @@
+﻿
+[UX AUDIT] 15 files checked
+--------------------------------------------------
+[!] ISSUES (4):
+  - [Cognitive Load] html.css: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] App.css: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] AuthContext.jsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] code.html: Form inputs without labels. Use <label> for accessibility and clarity.
+[*] WARNINGS (82):
+  - [Reflective] mustRead.html: Long-form content without brand story/values. Add 'About' or 'Why We Exist' section.
+  - [Trust] mustRead.html: No social proof detected. Consider adding testimonials, ratings, or 'Trusted by' logos.
+  - [Typography] mustRead.html: No line length constraint (45-75ch). Use max-w-prose or max-w-[65ch].
+  - [Typography] mustRead.html: Text elements found without line-height. Body: 1.4-1.6, Headings: 1.1-1.3
+  - [Visual] mustRead.html: Flat design with no depth. Consider shadows or subtle gradients for hierarchy.
+  - [Von Restorff] html.css: No primary CTA
+  - [Reflective] html.css: Long-form content without brand story/values. Add 'About' or 'Why We Exist' section.
+  - [Trust] html.css: No social proof detected. Consider adding testimonials, ratings, or 'Trusted by' logos.
+  - [Trust] html.css: Footer lacks authority signals. Add certifications, awards, or media mentions.
+  - [Typography] html.css: No line length constraint (45-75ch). Use max-w-prose or max-w-[65ch].
+  - [Typography] html.css: Fixed font sizes without clamp(). Consider fluid typography: clamp(MIN, PREFERRED, MAX)
+  - [Visual] html.css: Flat design with no depth. Consider shadows or subtle gradients for hierarchy.
+  - [Serial Position] index.html: Last nav item may not be important. Place key actions at start/end.
+  - [Trust] App.css: Form without security indicators. Add 'SSL Secure' or lock icon.
+  - [Performance] App.css: Animating expensive properties (margin, padding, width, height). Use transform/opacity where possible.
+[+] PASSED CHECKS: 6
+STATUS: FAIL
